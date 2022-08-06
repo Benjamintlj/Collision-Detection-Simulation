@@ -8,23 +8,23 @@ import java.math.BigDecimal;
 
 public class Ball extends GameObject {
 
-    private int velocityX;
-    private int velocityY;
+    private double velocityX;
+    private double velocityY;
 
-    private int positionX;
-    private int positionY;
+    private double positionX;
+    private double positionY;
 
-    private int prevPositionX;
-    private int prevPositionY;
+    private double prevPositionX;
+    private double prevPositionY;
 
-    private int centerX;
-    private int centerY;
+    private double centerX;
+    private double centerY;
 
-    private int accelerationX;
-    private int accelerationY;
+    private double accelerationX;
+    private double accelerationY;
 
 
-    public Ball(int diameter, int spawnX, int spawnY, int velocityX, int velocityY, int accelerationX, int accelerationY) {
+    public Ball(int diameter, int spawnX, int spawnY, double velocityX, double velocityY, double accelerationX, double accelerationY) {
         super(diameter, spawnX, spawnY);
 
         this.velocityX = velocityX;
@@ -33,8 +33,8 @@ public class Ball extends GameObject {
         this.positionX = spawnX;
         this.positionY = spawnY;
 
-        this.centerX = positionX + diameter / 2;
-        this.centerY = positionY + diameter / 2;
+        this.centerX = positionX + (double) diameter / 2;
+        this.centerY = positionY + (double) diameter / 2;
 
         this.accelerationX = accelerationX;
         this.accelerationY = accelerationY;
@@ -50,9 +50,7 @@ public class Ball extends GameObject {
     private void updateVectors() {
         velocityX = velocityX + accelerationX;
         velocityY = velocityY + accelerationY;
-
-        System.out.println(velocityY);
-
+        
         prevPositionX = positionX;
         prevPositionY = positionY;
 
@@ -62,8 +60,8 @@ public class Ball extends GameObject {
         centerX = positionX + radius;
         centerY = positionY + radius;
 
-        position.setX(positionX);
-        position.setY(positionY);
+        position.setX((int) positionX);
+        position.setY((int) positionY);
     }
 
     private void checkIfBallIsStill() {
@@ -88,6 +86,7 @@ public class Ball extends GameObject {
         if ( centerY + radius > display.getHeight() - display.getWindowBorderSize()) {
             velocityY += accelerationY;
             velocityY *= -1;
+            System.out.println(velocityY);
         }
 
         // hit top
@@ -120,7 +119,6 @@ public class Ball extends GameObject {
         Graphics2D graphics = image.createGraphics();
 
         graphics.setColor(Color.WHITE);
-        //graphics.fillRect(0, 0, size.getWidth(), size.getHeight());
         graphics.drawOval(0,0, size.getRadius(), size.getRadius());
 
         graphics.dispose();
