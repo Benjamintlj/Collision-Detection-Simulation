@@ -12,8 +12,10 @@ public class Display extends JFrame{
     private Canvas canvas;
     private Renderer renderer;
 
+    private final int windowBorderSize;
+
     public Display(int width, int height, Input input) {
-        setTitle("P O N G");
+        setTitle("B A L L - S I M");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
 
@@ -30,6 +32,8 @@ public class Display extends JFrame{
 
         setLocationRelativeTo(null);
         setVisible(true);
+
+        this.windowBorderSize = this.getHeight() - height;
     }
 
     public void render(Game game) {
@@ -44,5 +48,9 @@ public class Display extends JFrame{
 
         graphics.dispose();
         bufferStrategy.show();
+    }
+
+    public int getWindowBorderSize() {
+        return windowBorderSize;
     }
 }
