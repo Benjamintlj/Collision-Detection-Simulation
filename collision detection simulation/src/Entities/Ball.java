@@ -14,45 +14,42 @@ public class Ball extends GameObject {
     private double positionX;
     private double positionY;
 
-    private double prevPositionX;
-    private double prevPositionY;
-
     private double centerX;
     private double centerY;
 
-    private double accelerationX;
-    private double accelerationY;
+    private final double accelerationX;
+    private final double accelerationY;
+
+    private final double mass;
 
 
-    public Ball(int diameter, int spawnX, int spawnY, double velocityX, double velocityY, double accelerationX, double accelerationY) {
-        super(diameter, spawnX, spawnY);
+    public Ball(int diameter, int spawnCenterX, int spawnCenterY, double velocityX, double velocityY, double accelerationX, double accelerationY, double mass) {
+        super(diameter, spawnCenterX, spawnCenterY);
 
         this.velocityX = velocityX;
         this.velocityY = velocityY;
 
-        this.positionX = spawnX;
-        this.positionY = spawnY;
+        this.positionX = getPosition().getX();
+        this.positionY = getPosition().getY();
 
-        this.centerX = positionX + (double) diameter / 2;
-        this.centerY = positionY + (double) diameter / 2;
+        this.centerX = spawnCenterX;
+        this.centerY = spawnCenterY;
 
         this.accelerationX = accelerationX;
         this.accelerationY = accelerationY;
+
+        this.mass = mass;
     }
 
     @Override
     public void update(Display display) {
         updateVectors();
-        checkIfBallIsStill();
         wallIntersection(display);
     }
 
-    private void updateVectors() {
+    public void updateVectors() {
         velocityX = velocityX + accelerationX;
         velocityY = velocityY + accelerationY;
-        
-        prevPositionX = positionX;
-        prevPositionY = positionY;
 
         positionX = positionX + velocityX;
         positionY = positionY + velocityY;
@@ -64,29 +61,12 @@ public class Ball extends GameObject {
         position.setY((int) positionY);
     }
 
-    private void checkIfBallIsStill() {
-
-//        //System.out.println(prevPositionY + " " + positionY);
-//        System.out.println(Math.abs(Math.abs(prevPositionY) - Math.abs(positionY)));
-//
-//        if (Math.abs(Math.abs(prevPositionY) - Math.abs(positionY)) < 0.3) {
-//            positionY = Math.abs(positionY);
-//            velocityY = 0;
-//        }
-//
-//        if (Math.abs(prevPositionX) + Math.abs(positionX) < 8) {
-//            positionX = Math.abs(positionX);
-//            velocityX = 0;
-//        }
-    }
-
     private void wallIntersection(Display display) {
 
         // hit bottom
         if ( centerY + radius > display.getHeight() - display.getWindowBorderSize()) {
             velocityY += accelerationY;
             velocityY *= -1;
-            System.out.println(velocityY);
         }
 
         // hit top
@@ -109,9 +89,6 @@ public class Ball extends GameObject {
 
     }
 
-    public void ballIntersection() {
-
-    }
 
     @Override
     public Image getSprite() {
@@ -123,5 +100,34 @@ public class Ball extends GameObject {
 
         graphics.dispose();
         return image;
+    }
+
+    public double getCenterX() {
+        return centerX;
+    }
+
+    public double getCenterY() {
+        return centerY;
+    }
+
+
+    public double getVelocityX() {
+        return velocityX;
+    }
+
+    public void setVelocityX(double velocityX) {
+        this.velocityX = velocityX;
+    }
+
+    public double getVelocityY() {
+        return velocityY;
+    }
+
+    public void setVelocityY(double velocityY) {
+        this.velocityY = velocityY;
+    }
+
+    public double getMass() {
+        return mass;
     }
 }

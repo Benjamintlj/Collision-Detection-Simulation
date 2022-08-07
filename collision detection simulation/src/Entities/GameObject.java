@@ -12,8 +12,12 @@ public abstract class GameObject {
     protected int diameter;
     protected int radius;
 
-    public GameObject (int diameter, int spawnX, int spawnY) {
-        position = new Position(spawnX, spawnY);
+    public GameObject (int diameter, int spawnCenterX, int spawnCenterY) {
+        position = new Position(
+                (spawnCenterX - diameter / 2),
+                (spawnCenterY - diameter / 2)
+        );
+
         size = new Size(diameter);
 
         this.diameter = diameter;
@@ -30,5 +34,9 @@ public abstract class GameObject {
 
     public Size getSize() {
         return size;
+    }
+
+    public int getRadius() {
+        return radius;
     }
 }
