@@ -25,7 +25,8 @@ public class Game {
         display = new Display(width, height, input);
         gameObjects = new ArrayList<>();
 
-        gameObjects.add(new Ball(50, 50, 350, 3, 0, 0, 0, 150));
+
+        gameObjects.add(new Ball(50, 50, 350, 3, 1, 0, 0, 2));
         gameObjects.add(new Ball(100, 300, 350, 1, 0, 0, 0, 1));
 
         System.out.println(display.getWindowBorderSize());

@@ -21,6 +21,8 @@ public class Ball extends GameObject {
 
     private final double mass;
 
+    private int timeInWall;
+
 
     public Ball(int diameter, int spawnCenterX, int spawnCenterY, double velocityX, double velocityY, double accelerationX, double accelerationY, double mass) {
         super(diameter, spawnCenterX, spawnCenterY);
@@ -38,6 +40,8 @@ public class Ball extends GameObject {
         this.accelerationY = accelerationY;
 
         this.mass = mass;
+
+        this.timeInWall = 0;
     }
 
     /**
@@ -77,24 +81,52 @@ public class Ball extends GameObject {
         if ( centerY + radius > display.getHeight() - display.getWindowBorderSize()) {
             velocityY += accelerationY;
             velocityY *= -1;
+
+            timeInWall += 1;
+            if (timeInWall > 1) {
+                timeInWall = 0;
+                velocityY = Math.abs(velocityY) * -1;
+                updateVectors();
+            }
         }
 
         // hit top
         if (centerY - radius < 0) {
             velocityY *= -1;
             velocityY -= accelerationY;
+
+            timeInWall += 1;
+            if (timeInWall > 1) {
+                timeInWall = 0;
+                velocityY= Math.abs(velocityY);
+                updateVectors();
+            }
         }
 
         // hit left
         if (centerX - radius < 0) {
             velocityX *= -1;
             velocityX -= accelerationX;
+
+            timeInWall += 1;
+            if (timeInWall > 1) {
+                timeInWall = 0;
+                velocityX = Math.abs(velocityX);
+                updateVectors();
+            }
         }
 
         // hit right
         if (centerX + radius > display.getWidth()) {
             velocityX += accelerationX;
             velocityX *= -1;
+
+            timeInWall += 1;
+            if (timeInWall > 1) {
+                timeInWall = 0;
+                velocityX = Math.abs(velocityX) * -1;
+                updateVectors();
+            }
         }
 
     }
