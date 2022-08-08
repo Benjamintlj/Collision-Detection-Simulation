@@ -6,7 +6,8 @@ public class Launcher {
      *
      * @param args ignores all args.
      */
+    // 800, 400
     public static void main(String[] args) {
-        new Thread(new GameLoop(new Game(800, 400))).start();
+        new Thread(new GameLoop(new Game(1000, 1000))).start();
     }
 }

@@ -23,7 +23,7 @@ public class Display extends JFrame{
     public Display(int width, int height, Input input) {
         setTitle("B A L L - S I M");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setResizable(false);
+        setResizable(true);
 
         renderer = new Renderer();
 

@@ -16,15 +16,19 @@ public class Ball extends GameObject {
     private double centerX;
     private double centerY;
 
-    private final double accelerationX;
-    private final double accelerationY;
+    private double accelerationX;
+    private double accelerationY;
 
     private final double mass;
 
     private int timeInWall;
 
+    private double collisionElasticity;
 
-    public Ball(int diameter, int spawnCenterX, int spawnCenterY, double velocityX, double velocityY, double accelerationX, double accelerationY, double mass) {
+    private boolean isStatic;
+
+
+    public Ball(int diameter, int spawnCenterX, int spawnCenterY, double velocityX, double velocityY, double mass, double collisionElasticity, boolean isStatic) {
         super(diameter, spawnCenterX, spawnCenterY);
 
         this.velocityX = velocityX;
@@ -36,12 +40,15 @@ public class Ball extends GameObject {
         this.centerX = spawnCenterX;
         this.centerY = spawnCenterY;
 
-        this.accelerationX = accelerationX;
-        this.accelerationY = accelerationY;
+        this.accelerationX = 0;
+        this.accelerationY = 0;
 
         this.mass = mass;
+        this.collisionElasticity = collisionElasticity;
 
         this.timeInWall = 0;
+
+        this.isStatic = isStatic;
     }
 
     /**
@@ -58,6 +65,9 @@ public class Ball extends GameObject {
      * Updates all vectors related to the ball.
      */
     public void updateVectors() {
+
+        if (isStatic) return;
+
         velocityX = velocityX + accelerationX;
         velocityY = velocityY + accelerationY;
 
@@ -69,6 +79,7 @@ public class Ball extends GameObject {
 
         position.setX((int) positionX);
         position.setY((int) positionY);
+
     }
 
     /**
@@ -190,5 +201,25 @@ public class Ball extends GameObject {
      */
     public double getMass() {
         return mass;
+    }
+
+    public double getAccelerationX() {
+        return accelerationX;
+    }
+
+    public double getAccelerationY() {
+        return accelerationY;
+    }
+
+    public void setAccelerationX(double accelerationX) {
+        this.accelerationX = accelerationX;
+    }
+
+    public void setAccelerationY(double accelerationY) {
+        this.accelerationY = accelerationY;
+    }
+
+    public double getCollisionElasticity() {
+        return collisionElasticity;
     }
 }

@@ -15,6 +15,7 @@ public class CollisionDetection {
                 if (j == i) continue;
                 if (isColliding(gameObjects.get(i), gameObjects.get(j))) {
                     collisionPhysics(gameObjects.get(i), gameObjects.get(j));
+                    System.out.println("---------------HIT-----------------------------------");
                 }
             }
         }
@@ -49,11 +50,11 @@ public class CollisionDetection {
         double ball1YVelocity = newYVelocity(ball1, ball2);
         double ball2YVelocity = newYVelocity(ball2, ball1);
 
-        ball1.setVelocityX(ball1XVelocity);
-        ball2.setVelocityX(ball2XVelocity);
+        ball1.setVelocityX(ball1XVelocity * ball1.getCollisionElasticity());
+        ball2.setVelocityX(ball2XVelocity * ball2.getCollisionElasticity());
 
-        ball1.setVelocityY(ball1YVelocity);
-        ball2.setVelocityY(ball2YVelocity);
+        ball1.setVelocityY(ball1YVelocity * ball1.getCollisionElasticity());
+        ball2.setVelocityY(ball2YVelocity * ball2.getCollisionElasticity());
 
         ball1.updateVectors();
         ball2.updateVectors();
