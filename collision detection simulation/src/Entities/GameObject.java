@@ -36,9 +36,9 @@ public abstract class GameObject {
     public abstract void update(Display display);
 
     /**
-     * @return an image of the object.
+     * Draws sprite onto the graphics object
      */
-    public abstract Image getSprite();
+    public abstract void getSprite(Graphics graphics);
 
     /**
      * @return position on display.

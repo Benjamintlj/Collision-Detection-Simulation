@@ -133,23 +133,14 @@ public class Ball extends GameObject {
 
 
     /**
-     * How the ball is rendered.
-     *
-     * Needs improvement:
-     *  - When ball images overlap front ball covers/hides the ball behind it.
-     *
-     * @return returns an image of the ball.
+     * Renders the ball onto the graphics object.
      */
     @Override
-    public Image getSprite() {
-        BufferedImage image = new BufferedImage(size.getRadius(), size.getRadius(), BufferedImage.TYPE_INT_RGB);
-        Graphics2D graphics = image.createGraphics();
+    public void getSprite(Graphics graphics) {
 
         graphics.setColor(Color.WHITE);
-        graphics.drawOval(0,0, size.getRadius(), size.getRadius());
+        graphics.drawOval(getPosition().getX(), getPosition().getY(), size.getRadius(), size.getRadius());
 
-        graphics.dispose();
-        return image;
     }
 
     /**

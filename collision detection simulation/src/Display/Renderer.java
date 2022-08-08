@@ -12,11 +12,16 @@ public class Renderer {
      * @param graphics graphics to be rendered.
      */
     public void render(Game game, Graphics graphics) {
-        game.getGameObjects().forEach(gameObject -> graphics.drawImage(
-                gameObject.getSprite(),
-                gameObject.getPosition().getX(),
-                gameObject.getPosition().getY(),
-                null
-        ));
+        game.getGameObjects().forEach(gameObject -> {
+            gameObject.getSprite(graphics);
+
+        });
     }
 }
+
+//graphics.drawImage(
+//        gameObject.getSprite(),
+//        gameObject.getPosition().getX(),
+//        gameObject.getPosition().getY(),
+//        null
+//        )
