@@ -14,6 +14,12 @@ public class Display extends JFrame{
 
     private final int windowBorderSize;
 
+    /**
+     * Creates the window for the game to be rendered upon.
+     * @param width screen width.
+     * @param height screen height.
+     * @param input input class used to detect user input.
+     */
     public Display(int width, int height, Input input) {
         setTitle("B A L L - S I M");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -36,6 +42,10 @@ public class Display extends JFrame{
         this.windowBorderSize = this.getHeight() - height;
     }
 
+    /**
+     * Renders the game.
+     * @param game game to be rendered.
+     */
     public void render(Game game) {
         BufferStrategy bufferStrategy = canvas.getBufferStrategy();
         Graphics graphics = bufferStrategy.getDrawGraphics();
@@ -50,6 +60,10 @@ public class Display extends JFrame{
         bufferStrategy.show();
     }
 
+    /**
+     * On the device used for testing (Mac OS), the window header takes up space.
+     * @return returns the size of the window header.
+     */
     public int getWindowBorderSize() {
         return windowBorderSize;
     }

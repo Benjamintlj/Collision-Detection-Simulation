@@ -15,6 +15,11 @@ public class Game {
     private List<Ball> gameObjects;
     private Input input;
 
+    /**
+     * Init game, all objs can be defined here.
+     * @param width screen width
+     * @param height screen height
+     */
     public Game(int width, int height) {
         input = new Input();
         display = new Display(width, height, input);
@@ -26,15 +31,26 @@ public class Game {
         System.out.println(display.getWindowBorderSize());
     }
 
+    /**
+     * Method called per update cycle.
+     * Used to update status of all game objs.
+     */
     public void update() {
         CollisionDetection.checkForCollision(gameObjects);
         gameObjects.forEach(gameObject -> gameObject.update(display));
     }
 
+    /**
+     * Renders all objects in the game.
+     * @param gameLoop
+     */
     public void render(GameLoop gameLoop) {
         display.render(gameLoop.getGame());
     }
 
+    /**
+     * @return returns all gameObjects
+     */
     public List<Ball> getGameObjects() {
         return gameObjects;
     }

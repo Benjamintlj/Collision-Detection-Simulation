@@ -1,7 +1,5 @@
 package Game;
 
-import Game.Game;
-
 public class GameLoop implements Runnable {
 
     private Game game;
@@ -12,16 +10,25 @@ public class GameLoop implements Runnable {
     private long nextStatTime;
     private int fps, ups;
 
-    // init game
+    /**
+     * Constructs a GameLoop obj.
+     * @param game the game obj that is desired to be played.
+     */
     GameLoop(Game game) {
         this.game = game;
     }
 
+    /**
+     * @return returns the game that is currently executing in the game loop
+     */
     public Game getGame() {
         return game;
     }
 
-    // main runnable
+    /**
+     * Main executable function, this runs on a new thread.
+     * It also manages the frame rate (FPS) and update rate (UPS).
+     */
     @Override
     public void run() {
         running = true;
@@ -47,6 +54,10 @@ public class GameLoop implements Runnable {
         }
     }
 
+    /**
+     * System.out the FPS and UPS.
+     * (this can be ignored)
+     */
     private void printStats() {
         if(System.currentTimeMillis() > nextStatTime) {
             System.out.println(String.format("FPS: %d, UPS: %d", fps, ups));
@@ -56,11 +67,17 @@ public class GameLoop implements Runnable {
         }
     }
 
+    /**
+     * Renders the game.
+     */
     private void render() {
         game.render(this);
         fps++;
     }
 
+    /**
+     * Updates all game objects.
+     */
     private void update() {
         game.update();
         ups++;

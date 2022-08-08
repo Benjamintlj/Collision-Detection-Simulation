@@ -5,6 +5,10 @@ import java.util.List;
 
 public class CollisionDetection {
 
+    /**
+     * Checks if balls are colliding, and runs appropriate measures if they are.
+     * @param gameObjects list of Balls.
+     */
     public static void checkForCollision(List<Ball> gameObjects) {
         for (int i = 0; i < gameObjects.size(); i++) {
             for (int j = 0; j < gameObjects.size(); j++) {
@@ -16,6 +20,12 @@ public class CollisionDetection {
         }
     }
 
+    /**
+     * Checks if balls are colliding.
+     * @param ball1 first ball.
+     * @param ball2 second ball.
+     * @return true if touching.
+     */
     private static boolean isColliding(Ball ball1, Ball ball2) {
 
         double xGap = ball1.getCenterX() - ball2.getCenterX();
@@ -27,6 +37,11 @@ public class CollisionDetection {
         return gap <= sumOfRadii;
     }
 
+    /**
+     * Changes balls respective velocities.
+     * @param ball1 first ball.
+     * @param ball2 second ball.
+     */
     private static void collisionPhysics(Ball ball1, Ball ball2) {
         double ball1XVelocity = newXVelocity(ball1, ball2);
         double ball2XVelocity = newXVelocity(ball2, ball1);
@@ -44,10 +59,24 @@ public class CollisionDetection {
         ball2.updateVectors();
     }
 
+    /**
+     * Calculates new X velocity for ball1.
+     * NOTE: this only calculates the velocity for the first ball, you will have to swap params, to calculate for the second ball.
+     * @param ball1 first ball.
+     * @param ball2 second ball.
+     * @return new X velocity for the first ball.
+     */
     private static double newXVelocity(Ball ball1, Ball ball2) {
         return (ball1.getVelocityX() * (ball1.getMass() - ball2.getMass()) + (2 * ball2.getMass() * ball2.getVelocityX())) / (ball1.getMass() + ball2.getMass());
     }
 
+    /**
+     * Calculates new Y velocity for ball1.
+     * NOTE: this only calculates the velocity for the first ball, you will have to swap params, to calculate for the second ball.
+     * @param ball1 first ball.
+     * @param ball2 second ball.
+     * @return new Y velocity for the first ball.
+     */
     private static double newYVelocity(Ball ball1, Ball ball2) {
         return (ball1.getVelocityY() * (ball1.getMass() - ball2.getMass()) + (2 * ball2.getMass() * ball2.getVelocityY())) / (ball1.getMass() + ball2.getMass());
     }
